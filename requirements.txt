@@ -14,7 +14,7 @@ Flask
 pydantic
 beautifulsoup4
 python-dotenv
-tavily
+tavily-python
 requests
 
 
