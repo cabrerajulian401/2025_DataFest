@@ -14,6 +14,51 @@ This Streamlit application helps businesses find the optimal location for their 
   - Property Tax
 - Alternative city recommendations with detailed metrics
 
+## New Feature: Real-time Analysis Progress Streaming
+
+The application now provides real-time progress updates during the AI-powered market analysis process. This allows users to see exactly what's happening at each step of the analysis.
+
+### Features:
+
+- **Visual Progress Bar**: Shows the current completion percentage
+- **Status Messages**: Displays the current stage of analysis with descriptive text
+- **Detailed Updates**: Provides specific information about what's being processed at each stage
+- **Terminal Logging Option**: Ability to track progress in the terminal for headless environments
+
+### How It Works:
+
+1. The application uses LangGraph's callback system to track progress through each node of the workflow
+2. Each node in the graph (query generation, web research, summarizing, etc.) reports its progress
+3. Progress is streamed to both the UI and optionally to the terminal
+4. The progress bar and messages update in real-time as the analysis moves through different stages
+
+### Usage:
+
+To run the application with UI progress visualization (default):
+```bash
+streamlit run app/realestate_app.py
+```
+
+To run with terminal-only progress logging (useful for debugging or headless environments):
+```bash
+streamlit run app/realestate_app.py --terminal-log
+```
+
+## Technical Implementation:
+
+- Added a callback mechanism in `graph.py` to track node transitions
+- Each node reports its progress percentage and current activity
+- Progress can be displayed in the UI, terminal, or logged to a file
+- The LangGraph workflow is now completely transparent to users
+
+## Requirements:
+
+- Python 3.7+
+- Streamlit
+- LangGraph
+- Ollama (for LLM inference)
+- Other dependencies in requirements.txt
+
 ## Installation
 
 1. Clone this repository
@@ -47,12 +92,6 @@ The app can run with mock data without R, but for real predictions using the mod
    ```
    R --version
    ```
-
-## Running the Application
-
-```bash
-streamlit run app/realestate_app.py
-```
 
 ## Data Sources
 

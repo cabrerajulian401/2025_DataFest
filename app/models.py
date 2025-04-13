@@ -881,11 +881,10 @@ class RealEstateModel:
             # Filter for the top markets
             top_market_data = self.big_dataset[self.big_dataset['market'].isin(top_markets)]
             
-            # Aggregate metrics by market
+            # Aggregate metrics by market (removing occupancy which is no longer available)
             market_metrics = top_market_data.groupby('market').agg({
                 'overall_rent': 'mean',
                 'crimerate': 'mean',
-                'avg_occupancy_proportion': 'mean',
                 'propertyTax': 'mean'
             }).reset_index()
             
@@ -900,10 +899,9 @@ class RealEstateModel:
                     r=[
                         market_data['overall_rent'],
                         market_data['crimerate'] * 100,  # Convert to percentage
-                        market_data['avg_occupancy_proportion'] * 100,  # Convert to percentage
                         market_data['propertyTax'] * 100  # Convert to percentage
                     ],
-                    theta=['Rent ($/SF)', 'Crime Rate (%)', 'Occupancy (%)', 'Property Tax (%)'],
+                    theta=['Rent ($/SF)', 'Crime Rate (%)', 'Property Tax (%)'],
                     fill='toself',
                     name=market
                 ))
