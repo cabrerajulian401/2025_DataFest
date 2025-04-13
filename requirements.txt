@@ -16,5 +16,9 @@ beautifulsoup4
 python-dotenv
 tavily-python
 requests
+rpy2
+streamlit_shadcn_ui
+sklearn
+pydeck
 
 

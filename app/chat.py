@@ -1,6 +1,8 @@
 import streamlit as st
 from langchain_ollama import ChatOllama
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+from rpy2.robjects import robjects
+from rpy2.robjects import pandas2ri
 
 st.title("Chatbot")
 
