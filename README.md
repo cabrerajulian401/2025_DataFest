@@ -1,112 +1,172 @@
-# Commercial Real Estate Recommendation System
+# 4th Place at ASA Datafest 2025
 
-This Streamlit application helps businesses find the optimal location for their commercial real estate needs based on industry, region preferences, price range, and office size requirements.
+*🏅 CTRL ALT ELITE took **4th** out of 30+ teams (100+ participants) at ASA DataFest 2025.*
 
-## Features
+## 🏢 Project Overview
 
-- Industry-based location recommendations
-- Multi-region analysis
-- Price range and office size filtering
-- Key metrics for each recommendation:
-  - Average Rent ($/SF)
-  - Crime Rate
-  - Occupancy Rate
-  - Property Tax
-- Alternative city recommendations with detailed metrics
+Team **CTRL ALT ELITE** created a data-driven tool that helps commercial real estate clients determine **when**, **where**, and **how much** office space to lease. We analyze trends from thousands of large office leases (≥10,000 sq ft) to provide actionable recommendations, driven by predictive modeling and an interactive UI.
 
-## New Feature: Real-time Analysis Progress Streaming
+Built during **DataFest 2025**, this project provides a 360° solution using:
+- Predictive ML models
+- Real-time dashboards
+- Interactive 3D globe visualizations
+- LLM-assisted reasoning
 
-The application now provides real-time progress updates during the AI-powered market analysis process. This allows users to see exactly what's happening at each step of the analysis.
+📁 GitHub Repo: [https://github.com/cabrerajulian401/2025_DataFest](https://github.com/cabrerajulian401/2025_DataFest)
 
-### Features:
+---
 
-- **Visual Progress Bar**: Shows the current completion percentage
-- **Status Messages**: Displays the current stage of analysis with descriptive text
-- **Detailed Updates**: Provides specific information about what's being processed at each stage
-- **Terminal Logging Option**: Ability to track progress in the terminal for headless environments
+## 💡 Features
 
-### How It Works:
+### ✅ Interactive Dashboard
+Built with **React + Flask**, allows clients to:
+- Select industry, city, budget, and size
+- View filtered metrics: rent trends, availability, crime, tax
+- Get tailored office lease recommendations
 
-1. The application uses LangGraph's callback system to track progress through each node of the workflow
-2. Each node in the graph (query generation, web research, summarizing, etc.) reports its progress
-3. Progress is streamed to both the UI and optionally to the terminal
-4. The progress bar and messages update in real-time as the analysis moves through different stages
+### 📊 Predictive Recommendations
+Machine learning models predict:
+- **Optimal Office Size (sq ft)**
+- **Best Market (city/region)**  
+Based on client inputs and historic leasing patterns.
 
-### Usage:
+### 🌍 3D Lease Density Globe
+Rendered with **Three.js**, this globe visualizes:
+- Leasing activity across U.S. cities
+- Industry-based clustering
+- Data-driven spikes based on volume
 
-To run the application with UI progress visualization (default):
+### 🧠 LLM-Powered Summarization
+Via **LangGraph + Ollama**, the system:
+- Summarizes regional insights
+- Answers natural language queries like  
+  *"Why is Austin ideal for tech clients?"*
+
+---
+
+## 🧱 Tech Stack
+
+| Layer       | Tools Used                                                                 |
+|-------------|-----------------------------------------------------------------------------|
+| **Frontend**| React, Three.js, CSS, HTML                                                 |
+| **Backend** | Flask, Streamlit, Python, RESTful APIs                                     |
+| **ML/Stats**| R (nnet, randomForest), pandas, scikit-learn                               |
+| **Visualization** | Plotly, ggplot2, 3D Globe via Three.js                               |
+| **LLM Layer**| Ollama (local LLM), LangGraph (workflow logic)                            |
+
+---
+
+## 🧑‍💻 Team Members
+
+- **Julian Cabrera** – Full-stack development (Flask, React, 3D globe)
+- **Salma El-Wakil** – Modeling and statistical analysis (R)
+- **Yaw Boateng** – Data engineering, integration, preprocessing
+- **Chris Ageh** – UI/UX, design, and visuals
+
+---
+
+## 🧪 Setup Instructions
+
+### 1. Clone the Repository
 ```bash
-streamlit run app/realestate_app.py
+git clone https://github.com/cabrerajulian401/2025_DataFest.git
+cd 2025_DataFest
 ```
 
-To run with terminal-only progress logging (useful for debugging or headless environments):
+### 2. Backend (Flask)
 ```bash
-streamlit run app/realestate_app.py --terminal-log
+cd Backend
+pip install -r requirements.txt
+python app.py
 ```
 
-## Technical Implementation:
+### 3. Frontend (React)
+```bash
+cd frontend  # or correct folder
+npm install
+npm start  # opens http://localhost:3000
+```
 
-- Added a callback mechanism in `graph.py` to track node transitions
-- Each node reports its progress percentage and current activity
-- Progress can be displayed in the UI, terminal, or logged to a file
-- The LangGraph workflow is now completely transparent to users
+### 4. R Model Setup
+```r
+install.packages(c("dplyr", "ggplot2", "nnet", "randomForest"))
+```
 
-## Requirements:
+Ensure R is installed and R_HOME is set.
 
-- Python 3.7+
-- Streamlit
-- LangGraph
-- Ollama (for LLM inference)
-- Other dependencies in requirements.txt
+### 5. Optional: Streamlit App
+```bash
+cd app
+streamlit run realestate_app.py
+```
 
-## Installation
+---
 
-1. Clone this repository
-2. Install Python dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+## 📁 File Structure
 
-## Setting Up R Integration (Optional)
+```
+2025_DataFest/
+├── Backend/
+│   └── app.py
+├── app/
+│   └── realestate_app.py
+├── eda/
+│   └── lease_models.R
+├── Savills_Data/
+│   └── Leases.csv
+├── Trimmed_RealEstateRecommender.mp4
+├── 3-D_Lease_Density_map.mp4
+├── CTRL ALT ELITE_Updated.pptx
+├── datafest_flyer.jpeg
+└── README.md
+```
 
-The app can run with mock data without R, but for real predictions using the models, you need to set up R:
+---
 
-1. **Install R**:
-   - Download R from [CRAN](https://cran.r-project.org/bin/windows/base/)
-   - Install with default settings
-   
-2. **Install required R packages**:
-   Open R or RStudio and run:
-   ```r
-   install.packages(c("dplyr", "tidyr", "ggplot2", "plotly", "randomForest", "nnet"))
-   ```
+## 🎥 Demos
 
-3. **Set R_HOME environment variable**:
-   - Find your R installation path (usually `C:\Program Files\R\R-x.x.x`)
-   - Set it as an environment variable:
-     - Windows: `set R_HOME=C:\Program Files\R\R-x.x.x`
-     - Linux/Mac: `export R_HOME=/path/to/R`
+### 📽️ [Trimmed_RealEstateRecommender.mp4](./Trimmed_RealEstateRecommender.mp4)
+- Streamlit UI walkthrough
+- Filter industry + market → Receive city + size suggestions
 
-4. **Verify R installation**:
-   Open Command Prompt/Terminal and run:
-   ```
-   R --version
-   ```
+### 🌐 [3-D_Lease_Density_map.mp4](./3-D_Lease_Density_map.mp4)
+- Interactive globe demo
+- Clickable lease clusters based on industry
 
-## Data Sources
+---
 
-The models use data from the Savills_Data directory:
-- Commercial real estate metrics
-- Regional pricing information
-- Occupancy rates
-- Crime statistics
-- Property tax information
+## 📌 Notable Capabilities
 
-## Troubleshooting
+- Smart filtering based on city, industry, and size
+- 3D interactive mapping with zoom/pan
+- Statistical model powered by **R**
+- LLM-powered context generation (via **LangGraph + Ollama**)
+- API endpoints for prediction/visual data
+- Deployed dashboard powered by **Flask + React**
 
-If you encounter R integration issues:
-1. Confirm R is installed and accessible from command line
-2. Check that all required R packages are installed
-3. Verify R_HOME environment variable is set correctly
-4. The app will fall back to mock data if R integration fails
+---
+
+## 📄 Deliverables
+
+| File                        | Description                                                  |
+|-----------------------------|--------------------------------------------------------------|
+| `README.md`                | Project documentation                                        |
+| `realestate_app.py`        | Streamlit version of full application                        |
+| `3-D_Lease_Density_map.mp4`| 3D visualization of lease locations                          |
+| `Trimmed_RealEstateRecommender.mp4` | Recommender UI demo walkthrough                |
+| `CTRL ALT ELITE_Updated.pptx`| Presentation deck from competition                          |
+| `datafest_flyer.jpeg`      | Visual flyer summarizing the tool                           |
+
+---
+
+## 🏁 Summary
+
+CTRL ALT ELITE offers a robust commercial lease recommendation system that fuses:
+- Data science 🧠  
+- Web development 🌐  
+- AI-enhanced insights 🤖  
+
+Proudly presented at **ASA DataFest 2025**, and awarded **4th place** for innovation and usability!
+
+🔗 GitHub: [https://github.com/cabrerajulian401/2025_DataFest](https://github.com/cabrerajulian401/2025_DataFest)
 
